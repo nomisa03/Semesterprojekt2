@@ -7,9 +7,6 @@ conn = sqlite3.connect('database.db')
 
 cur = conn.cursor()
 
-conn.execute("")
-
-#Test
 data = [
 (now), ("Rum 1"), (28) ,("Person i rummet"), ("Giver varm luft")
 ]
