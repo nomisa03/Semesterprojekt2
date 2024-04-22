@@ -22,6 +22,12 @@ conn.commit()
 def Readsystem()
     #Læs I2C fra data harvester
     #while read = true
+    #læst data
+    #Vent 10sek
+    #Hvis requst = true 
+    #makegraph()
+    #break
+
     cur.execute("INSERT INTO Data VALUES(? , ? , ? , ? , ?)", data)
     return 0
 
@@ -32,4 +38,5 @@ def Readsystem()
     #read = grahp
     #Matplotlib
     #Send til GUI
+    #readdata()
     #return graph
