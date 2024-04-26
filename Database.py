@@ -29,25 +29,27 @@ cur = conn.cursor()
 cur.execute("CREATE TABLE IF NOT EXISTS Rum1(Timestamp, Room, Temperatur, Aktvitet, Statusrum)")
 cur.execute("CREATE TABLE IF NOT EXISTS Rum2(Timestamp, Room, Temperatur, Aktvitet, Statusrum)")
 
-def Readsystem()
-    incomming.split(":",)
-    cur.execute("INSERT INTO Rum1 VALUES(? , ? , ? , ? , ?)", incomming)
+def Readsystem(incomming):
+    incomming.split(":",) # so list looks like this incommin = [Rum1, 28 , ("Person i rummet") : Rum2, 28, ("Tomt")]
+    cur.execute("INSERT INTO Rum1 VALUES(? , ? , ? , ? , ?)",now, incomming[0])
     print("Data succsesfu in table Rum 1")
     conn.commit
-    if incomming == 2():
-    try 
-        cur.execute("INSERT INTO Rum2 VALUES(? , ? , ? , ? , ?)", incomming)
-        print("Data succsesfu in table Rum 2")
-        conn.commit
-    else
-        return 0
+    if len(incomming) == 2():
+        try:
+            cur.execute("INSERT INTO Rum2 VALUES(? , ? , ? , ? , ?)",now, incomming[1])
+            print("Data succsesfu in table Rum 2")
+            conn.commit
+        else:
+            return 0
 
 
-def ReadUART()
-    while True:
-        for line in ser.read():
-            incomming = str(count) + str(': ') + chr(line)
-            count = count+1
+
+while True:
+    for line in ser.read():
+        incomming = str(count) + str(': ') + chr(line)
+        print(incomming)
+        Readsystem(incomming)
+        count = count+1
 
 
 #def makegraph()
