@@ -1,7 +1,5 @@
 import sqlite3
 from datetime import datetime
-import matplotlib as plt
-from matplotlib import gridspec
 import serial
 
 now = datetime.now() #For making a timestamp of current time
@@ -23,8 +21,8 @@ ser = serial.Serial(
     bytesize=serial.EIGHTBITS,\
     timeout=0)
 
-cur.execute("CREATE TABLE IF NOT EXISTS Rum1(Timestamp, Room, Temperatur, Aktvitet, Statusrum)")
-cur.execute("CREATE TABLE IF NOT EXISTS Rum2(Timestamp, Room, Temperatur, Aktvitet, Statusrum)")
+cur.execute("CREATE TABLE IF NOT EXISTS Rum1(Timestamp, Temperatur, Aktvitet, Statusrum)")
+cur.execute("CREATE TABLE IF NOT EXISTS Rum2(Timestamp, Temperatur, Aktvitet, Statusrum)")
 
 def Readsystem(incomming):
     rooms = 0
@@ -34,12 +32,12 @@ def Readsystem(incomming):
     rum1.insert(0, now)
     rum2 = incomming[2].split(":")
     rum2.insert(0, now)
-    cur.execute("INSERT INTO Rum1 VALUES(? , ? , ? , ? , ?)",rum1)
+    cur.execute("INSERT INTO Rum1 VALUES(? , ? , ? , ?)",rum1)
     print("Data succsesfu in table Rum 1")
     conn.commit
     if len(incomming) == string_count():
         try:
-            cur.execute("INSERT INTO Rum2 VALUES(? , ? , ? , ? , ?)",rum2)
+            cur.execute("INSERT INTO Rum2 VALUES(? , ? , ? , ?)",rum2)
             print("Data succsesfu in table Rum 2")
             conn.commit
             main()
@@ -49,11 +47,12 @@ def Readsystem(incomming):
 
 
 
-def main()
+def main():
     while True:
         ser.open()
         line = ser.readline()
-        incomming = line.decode()
+        #incomming = line.decode()
+        incomming = ("Master brude være ligeglade" ";" "22"":""Person i rummet"":""Varme blvier givet" ";" "18"":""Rummet er tomt "":""Rom inaktivit" )
         print(incomming)
         Readsystem(incomming)
         ser.close()
