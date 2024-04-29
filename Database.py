@@ -30,12 +30,16 @@ def Readsystem(incomming):
     rooms = 0
     incomming.split(";",) # so list looks like this incommin = [Rum1, 28 , ("Person i rummet") : Rum2, 28, ("Tomt")]
     string_count = len(incomming)
-    cur.execute("INSERT INTO Rum1 VALUES(? , ? , ? , ? , ?)",now, incomming[1])
+    rum1 = incomming[1].split(":")
+    rum1.insert(0, now)
+    rum2 = incomming[2].split(":")
+    rum2.insert(0, now)
+    cur.execute("INSERT INTO Rum1 VALUES(? , ? , ? , ? , ?)",rum1)
     print("Data succsesfu in table Rum 1")
     conn.commit
     if len(incomming) == string_count():
         try:
-            cur.execute("INSERT INTO Rum2 VALUES(? , ? , ? , ? , ?)",now, incomming[2])
+            cur.execute("INSERT INTO Rum2 VALUES(? , ? , ? , ? , ?)",rum2)
             print("Data succsesfu in table Rum 2")
             conn.commit
             main()
