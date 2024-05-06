@@ -1,9 +1,9 @@
 import sqlite3
-from datetime import datetime
+#from datetime import datetime
 import serial
 from serial import Serial
 
-now = datetime.now() #For making a timestamp of current time
+#now = datetime.now() #For making a timestamp of current time
 
 conn = sqlite3.connect('database.db') #connet to local database in file system
 cur = conn.cursor() #cursoer for looking in database
@@ -31,9 +31,9 @@ def Readsystem(incomming):
     incomming.split(";",) # so list looks like this incommin = [Rum1; 28 , ("1") : Rum2, 28, ("0")]
     string_count = len(incomming)
     rum1 = incomming[1].split(":")
-    rum1.insert(0, now)
+    #rum1.insert(0, now)
     rum2 = incomming[2].split(":")
-    rum2.insert(0, now)
+    #rum2.insert(0, now)
     if len(rum1) == 4:
         try:
             cur.execute("INSERT INTO Rum1 VALUES(? , ? , ? , ?)",rum1)
@@ -58,12 +58,28 @@ def Readsystem(incomming):
 def main():
     while True:
         ser.open()
-        line = ser.readline()
-        #incomming = line.decode()
-        incomming = ("Master brude være ligeglade" ";" "22"":""1"":""-1" ";" "18"":""0 "":""0" )
-        print(incomming)
-        Readsystem(incomming)
-        ser.close()
+        bytesToRead = conn.in_waiting
+        print(bytesToRead)
+        if (bytesToRead > 3):
+            incomming = conn.read(bytesToRead)
+            print(incomming)
+            Readsystem(incomming)
+            conn.reset_input_buffer()
+            #incomming = port.readline()
+            #print(incomming)
+            ser.close()
+
+
+
+    #while True:
+        #ser.open()
+        #line = port_is_waitng
+        #line = ser.readline()
+        #incomming = line.decode("UTF-8")
+        #incomming = ("Master brude være ligeglade" ";" "22"":""1"":""-1" ";" "18"":""0 "":""0" )
+        #print(incomming)
+        #Readsystem(incomming)
+        #ser.close()
 
 
 if __name__ == "__main__":
