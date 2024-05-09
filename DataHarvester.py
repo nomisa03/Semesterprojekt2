@@ -1,19 +1,9 @@
-#Arduino skal input
-import serial
+my_list = ['M:1;S:48:T:31.20:M:1;S:49:T:1.20:M:1;\r\n']
 
-ser = serial.Serial(
-    port='COM5',\
-    baudrate=9600,\
-    parity=serial.PARITY_NONE,\
-    stopbits=serial.STOPBITS_ONE,\
-    bytesize=serial.EIGHTBITS,\
-        timeout=0)
+# Extracting the string from the list (assuming there's only one element in the list)
+string_to_split = my_list[0]
 
+# Splitting the string by ";"
+split_list = string_to_split.split(";")
 
-while True:
-    for line in ser.read():
-
-        print(str(count) + str(': ') + chr(line) )
-        count = count+1
-
-ser.close()
+print(split_list)
