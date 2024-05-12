@@ -1,7 +1,6 @@
 import sqlite3
 from datetime import datetime
 import serial
-from serial import Serial
 incomming = []
 
 #['M:1;S:48:T:31.20:M:1;S:49:T:1.20:M:1;\r\n']
@@ -17,13 +16,7 @@ cur = conn.cursor() #cursoer for looking in database
 #Example of a data frame from master arduino
 
 #Setting up our serial port to read the system
-#ser = serial.Serial(
-    #port='COM4',\
-    #baudrate=9600,\
-    #parity=serial.PARITY_NONE,\
-    #stopbits=serial.STOPBITS_ONE,\
-    #bytesize=serial.EIGHTBITS,\
-    #timeout=0)
+ser = serial.Serial(port='COM4', baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
 
 # Aktivitet høj = 1, lav = 0. Statusrum -1 = afgiver varme, 0 = neutral, 1 = får varme
 cur.execute("CREATE TABLE IF NOT EXISTS Rum1(Timestamp, Temperatur, Aktivitet)")
@@ -94,19 +87,19 @@ def main():
 
 
     while True:
-        #ser.open()
-        #line = ser.in_waiting
-        incomming = ['M:1;S:48:T:31.20:M:1;S:49:T:1.20:M:1;\r\n']
+        ser.open()
+        line = ser.in_waiting
+        #incomming = ['M:1;S:48:T:31.20:M:1;S:49:T:1.20:M:1;\r\n']
         Readsystem(incomming)
         print(incomming)
-        #print(line)
-        #if line > 37:
-            #bytestoread = ser.read(line)
-            #incomming.append(bytestoread.decode("UTF-8"))
+        print(line)
+        if line > 40:
+            bytestoread = ser.read(line)
+            incomming.append(bytestoread.decode("UTF-8"))
             #incomming = ("Master brude være ligeglade" ";" "22"":""1"":""-1" ";" "18"":""0 "":""0" )
-            #print(incomming)
-            #Readsystem(incomming)
-            #ser.close()
+            print(incomming)
+            Readsystem(incomming)
+            ser.close()
 
 
 if __name__ == "__main__":
