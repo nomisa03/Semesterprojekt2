@@ -16,8 +16,8 @@ cur = conn.cursor() #cursoer for looking in database
 #ser = serial.Serial(port='COM4', baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
 
 # Aktivitet høj = 1, lav = 0. Statusrum -1 = afgiver varme, 0 = neutral, 1 = får varme
-cur.execute("CREATE TABLE IF NOT EXISTS Rum1(Timestamp, Temperatur, Aktivitet)")
-cur.execute("CREATE TABLE IF NOT EXISTS Rum2(Timestamp, Temperatur, Aktivitet)")
+cur.execute("CREATE TABLE IF NOT EXISTS Rum1(Temperatur, Aktivitet, Time)")
+cur.execute("CREATE TABLE IF NOT EXISTS Rum2(Temperatur, Aktivitet, Time)")
 
 def Readsystem(incomming):
     string_to_split = incomming[0]
@@ -39,16 +39,26 @@ def Readsystem(incomming):
         rum1.pop(0)
         rum1.pop(0)
         rum1.pop(1)
-        rum1.insert(0,datetime.now())
+        rum1.pop(2)
+        date_string = rum1[2]
+        date_format = "%Y,%m,%d,%H,%M,%S"
+        timestamp = datetime.strptime(date_string, date_format)
+        rum1.pop(2)
+        rum1.append(timestamp)
         print(rum1)
 
-        data_to_split2 = split_list[2]
+        data_to_split2 = split_list[3]
         rum2 = data_to_split2.split(":")
         rum2.pop(0)
         rum2.pop(0)
         rum2.pop(0)
         rum2.pop(1)
-        rum2.insert(0,datetime.now())
+        rum2.pop(2)
+        date_string1 = rum2[2]
+        date_format1 = "%Y,%m,%d,%H,%M,%S"
+        timestamp1 = datetime.strptime(date_string1, date_format1)
+        rum2.pop(2)
+        rum2.append(timestamp1)
         print(rum2)
 
         try:
@@ -76,7 +86,7 @@ def main():
         time.sleep(t)
         #ser.open()
         #line = ser.in_waiting
-        incomming = ['M:1;S:48:T:31.20:M:1;S:49:T:1.20:M:1;\r\n']
+        incomming = ['M:1;S:48:T:31.20:M:1:D:2023,06,14,12,14,30;M:1;S:49:T:1.20:M:1:D:2023,06,14,12,14,30;\r\n']
         Readsystem(incomming)
         print(incomming)
         #print(line)
@@ -98,9 +108,9 @@ def sendtimestamp():
     mystr += hex(dt.second)
     mystr += "\r\n"
     print(mystr)
-    # ser.open()
-    # ser.write(mystr)
-    # ser.close()
+    #ser.open()
+    #ser.write(mystr)
+    #ser.close()
     main()
 
 if __name__ == "__main__":
