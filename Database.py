@@ -1,7 +1,10 @@
 import sqlite3
 from datetime import datetime
 import serial
-incomming = []
+import time
+t = 1 #time to sleep = 1 secs
+
+incomming = [] #creating the list for the data to be in
 
 #['M:1;S:48:T:31.20:M:1;S:49:T:1.20:M:1;\r\n']
 
@@ -9,11 +12,6 @@ now = datetime.now() #For making a timestamp of current time
 
 conn = sqlite3.connect('database.db') #connet to local database in file system
 cur = conn.cursor() #cursoer for looking in database
-
-#data = [
-#(now), ("Rum 1"), (28) ,("Person i rummet"), ("Giver varm luft")
-#]
-#Example of a data frame from master arduino
 
 #Setting up our serial port to read the system
 ser = serial.Serial(port='COM4', baudrate=9600, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE, bytesize=serial.EIGHTBITS, timeout=0)
@@ -87,6 +85,7 @@ def main():
 
 
     while True:
+        time.sleep(t)
         ser.open()
         line = ser.in_waiting
         #incomming = ['M:1;S:48:T:31.20:M:1;S:49:T:1.20:M:1;\r\n']
@@ -100,7 +99,6 @@ def main():
             print(incomming)
             Readsystem(incomming)
             ser.close()
-
 
 if __name__ == "__main__":
     main()
