@@ -28,9 +28,9 @@ def Readsystem(incomming):
 
     data_to_split = split_list[0]
     M1 = data_to_split.split(":")
-    print(M1)
     M1.pop(0)
-    if (M1 == 2):
+    print(M1)
+    if M1[0] == "2":
         sendtimestamp()
     else:
         data_to_split1 = split_list[1]
@@ -76,7 +76,7 @@ def main():
         time.sleep(t)
         #ser.open()
         #line = ser.in_waiting
-        incomming = ['M:2;S:48:T:31.20:M:1;S:49:T:1.20:M:1;\r\n']
+        incomming = ['M:1;S:48:T:31.20:M:1;S:49:T:1.20:M:1;\r\n']
         Readsystem(incomming)
         print(incomming)
         #print(line)
@@ -96,6 +96,7 @@ def sendtimestamp():
     mystr += hex(dt.hour)
     mystr += hex(dt.minute)
     mystr += hex(dt.second)
+    mystr += "\r\n"
     print(mystr)
     # ser.open()
     # ser.write(mystr)
