@@ -8,6 +8,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/dataSources/09447376-3b94-43e0-93f6-74cf894d4eb2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/09447376-3b94-43e0-93f6-74cf894d4eb2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Database.py" beforeDir="false" afterPath="$PROJECT_DIR$/Database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Test file.py" beforeDir="false" afterPath="$PROJECT_DIR$/Test file.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/database.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -50,6 +51,7 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;Python.DataHarvester.executor&quot;: &quot;Run&quot;,
     &quot;Python.Database.executor&quot;: &quot;Run&quot;,
     &quot;Python.Test file.executor&quot;: &quot;Run&quot;,
@@ -88,6 +90,8 @@
       <workItem from="1715504733729" duration="73000" />
       <workItem from="1715592236595" duration="9492000" />
       <workItem from="1715603401672" duration="3192000" />
+      <workItem from="1715682100803" duration="13649000" />
+      <workItem from="1715761604276" duration="476000" />
     </task>
     <servers />
   </component>
@@ -96,7 +100,7 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Semesterprojekt2$DataHarvester.coverage" NAME="DataHarvester Coverage Results" MODIFIED="1715256211157" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Semesterprojekt2$Database.coverage" NAME="Database Coverage Results" MODIFIED="1715610688025" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/Semesterprojekt2$Test_file.coverage" NAME="Test file Coverage Results" MODIFIED="1715594187035" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Semesterprojekt2$Database.coverage" NAME="Database Coverage Results" MODIFIED="1715699024225" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Semesterprojekt2$Test_file.coverage" NAME="Test file Coverage Results" MODIFIED="1715686406575" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -499,7 +499,7 @@
     <routine id="190" parent="1" name="fts5"/>
     <schema id="191" parent="1" name="main">
       <Current>1</Current>
-      <LastIntrospectionLocalTimestamp>2024-05-13.12:26:30</LastIntrospectionLocalTimestamp>
+      <LastIntrospectionLocalTimestamp>2024-05-14.15:29:07</LastIntrospectionLocalTimestamp>
     </schema>
     <argument id="192" parent="16">
       <ArgumentDirection>R</ArgumentDirection>
@@ -1590,26 +1590,46 @@
     <argument id="554" parent="190">
       <Position>1</Position>
     </argument>
-    <table id="555" parent="191" name="sqlite_master">
+    <table id="555" parent="191" name="Rum1"/>
+    <table id="556" parent="191" name="Rum2"/>
+    <table id="557" parent="191" name="sqlite_master">
       <System>1</System>
     </table>
-    <column id="556" parent="555" name="type">
+    <column id="558" parent="555" name="Temperatur">
+      <Position>1</Position>
+    </column>
+    <column id="559" parent="555" name="Aktivitet">
+      <Position>2</Position>
+    </column>
+    <column id="560" parent="555" name="Time">
+      <Position>3</Position>
+    </column>
+    <column id="561" parent="556" name="Temperatur">
+      <Position>1</Position>
+    </column>
+    <column id="562" parent="556" name="Aktivitet">
+      <Position>2</Position>
+    </column>
+    <column id="563" parent="556" name="Time">
+      <Position>3</Position>
+    </column>
+    <column id="564" parent="557" name="type">
       <DasType>TEXT|0s</DasType>
       <Position>1</Position>
     </column>
-    <column id="557" parent="555" name="name">
+    <column id="565" parent="557" name="name">
       <DasType>TEXT|0s</DasType>
       <Position>2</Position>
     </column>
-    <column id="558" parent="555" name="tbl_name">
+    <column id="566" parent="557" name="tbl_name">
       <DasType>TEXT|0s</DasType>
       <Position>3</Position>
     </column>
-    <column id="559" parent="555" name="rootpage">
+    <column id="567" parent="557" name="rootpage">
       <DasType>INT|0s</DasType>
       <Position>4</Position>
     </column>
-    <column id="560" parent="555" name="sql">
+    <column id="568" parent="557" name="sql">
       <DasType>TEXT|0s</DasType>
       <Position>5</Position>
     </column>
