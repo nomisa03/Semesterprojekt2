@@ -46,19 +46,25 @@ def Readsystem(incomming):
                 rum1.pop(2)
                 if rum1[0] == "0.00":
                     print("Fake reading")
+                    main()
                 else:
                     parts = []
                     parts = rum1[2].split(',')
-                    day_of_year = int(parts[0])
-                    hours = int(parts[1])
-                    minutes = int(parts[2])
-                    seconds = int(parts[3])
-                    date = datetime.strptime(f'{day_of_year} {hours}:{minutes}:{seconds}', '%j %H:%M:%S')
+                    year = int(parts[0], 16)
+                    month = int(parts[1], 16)
+                    day = int(parts[2], 16)
+                    hour = int(parts[3], 16)
+                    minute = int(parts[4], 16)
+                    second = int(parts[5], 16)
+                    year += 2000
+                    date = datetime(year, month, day, hour, minute, second)
                     rum1.pop(2)
                     rum1.append(date)
                     print(rum1)
             except:
                 print("failed to split data")
+                print(incomming)
+
                 main()
 
 
@@ -72,14 +78,18 @@ def Readsystem(incomming):
                 rum2.pop(2)
                 if rum1[0] == "0.00":
                     print("Fake reading")
+                    main()
                 else:
                     parts1 = []
                     parts1 = rum2[2].split(',')
-                    day_of_year1 = int(parts1[0])
-                    hours1 = int(parts1[1])
-                    minutes1 = int(parts1[2])
-                    seconds1 = int(parts1[3])
-                    date1 = datetime.strptime(f'{day_of_year1} {hours1}:{minutes1}:{seconds1}', '%j %H:%M:%S')
+                    year1 = int(parts1[0], 16)
+                    month1 = int(parts1[1], 16)
+                    day1 = int(parts1[2], 16)
+                    hour1 = int(parts1[3], 16)
+                    minute1 = int(parts1[4], 16)
+                    second1 = int(parts1[5], 16)
+                    year1 += 2000
+                    date1 = datetime(year1, month1, day1, hour1, minute1, second1)
                     print(date1)
                     rum2.pop(2)
                     rum2.append(date1)
@@ -115,11 +125,12 @@ def main():
     time.sleep(t)
     incomming = []
     data = ser.readline().decode('utf-8')
-    #data = ['M:1;I:48:T:0.00:S:1:D:70,5,11,14,34,49;I:49:T:31.60:S:1:D:70,5,11,14,31,30;']
+    #data = ['M:1;I:48:T:36.10:S:4:D:24,5,5,14,12,36;I:49:T:30.10:S:10:D:24,5,5,14,12,36;']
+    #data = ['M:1;I:48:T:0.00:S:1:D:24,5,5,14,12,36;I:49:T:31.60:S:1:D:24,5,5,14,12,36;']
     #data = []
     incomming = data
     if data:
-        if len(data) > 2:
+        if len(data) > 0:
             print("Putting into table")
             print(incomming)
             Readsystem(incomming)
