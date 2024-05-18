@@ -76,7 +76,7 @@ def Readsystem(incomming):
                 rum2.pop(0)
                 rum2.pop(1)
                 rum2.pop(2)
-                if rum1[0] == "0.00":
+                if rum2[0] == "0.00":
                     print("Fake reading")
                     main()
                 else:
