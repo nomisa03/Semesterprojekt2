@@ -21,34 +21,43 @@ cur.execute("CREATE TABLE IF NOT EXISTS Rum1(Temperatur, Aktivitet, Time)")
 cur.execute("CREATE TABLE IF NOT EXISTS Rum2(Temperatur, Aktivitet, Time)")
 
 def Readsystem(incomming):
+    # Function to process an incoming string, split it, and handle different cases based on the split content
+
     string_to_split = incomming
-    # Splitting the string by ";"
+    # Splitting the incoming string by ";"
     split_list = string_to_split.split(";")
 
+    # Print the split list for debugging
     print(split_list)
 
+    # Processing the first part of the split list
     data_to_split = split_list[0]
     M1 = data_to_split.split(":")
-    M1.pop(0)
-    print(M1)
+    M1.pop(0)  # Removing the first element from M1
+    print(M1)  # Print M1 for debugging
+
     try:
         if M1[0] == "2":
+            # If the first element after pop is "2", call sendtimestamp function
             sendtimestamp()
-
         else:
             try:
+                # Processing the second part of the split list
                 data_to_split1 = split_list[1]
                 rum1 = data_to_split1.split(":")
+                # Removing unnecessary elements from rum1
                 rum1.pop(0)
                 rum1.pop(0)
                 rum1.pop(0)
                 rum1.pop(1)
                 rum1.pop(2)
+
                 if rum1[0] == "0.00":
+                    # If the first element is "0.00", it's a fake reading
                     print("Fake reading")
-                    main()
+                    main()  # Call main function to restart or handle the next steps
                 else:
-                    parts = []
+                    # Parsing date and time from the remaining elements
                     parts = rum1[2].split(',')
                     year = int(parts[0], 16)
                     month = int(parts[1], 16)
@@ -59,28 +68,31 @@ def Readsystem(incomming):
                     year += 2000
                     date = datetime(year, month, day, hour, minute, second)
                     rum1.pop(2)
-                    rum1.append(date)
-                    print(rum1)
+                    rum1.append(date)  # Appending the parsed date to rum1
+                    print(rum1)  # Print rum1 for debugging
             except:
+                # If there is an error in splitting data
                 print("failed to split data")
-                print(incomming)
-
-                main()
-
+                print(incomming)  # Print the incoming string for debugging
+                main()  # Call main function to restart or handle the next steps
 
             try:
+                # Processing the third part of the split list
                 data_to_split2 = split_list[2]
                 rum2 = data_to_split2.split(":")
+                # Removing unnecessary elements from rum2
                 rum2.pop(0)
                 rum2.pop(0)
                 rum2.pop(0)
                 rum2.pop(1)
                 rum2.pop(2)
+
                 if rum2[0] == "0.00":
+                    # If the first element is "0.00", it's a fake reading
                     print("Fake reading")
-                    main()
+                    main()  # Call main function to restart or handle the next steps
                 else:
-                    parts1 = []
+                    # Parsing date and time from the remaining elements
                     parts1 = rum2[2].split(',')
                     year1 = int(parts1[0], 16)
                     month1 = int(parts1[1], 16)
@@ -90,36 +102,39 @@ def Readsystem(incomming):
                     second1 = int(parts1[5], 16)
                     year1 += 2000
                     date1 = datetime(year1, month1, day1, hour1, minute1, second1)
-                    print(date1)
+                    print(date1)  # Print the parsed date for debugging
                     rum2.pop(2)
-                    rum2.append(date1)
-                    print(rum2)
+                    rum2.append(date1)  # Appending the parsed date to rum2
+                    print(rum2)  # Print rum2 for debugging
             except:
+                # If there is an error in splitting data
                 print("failed to split data")
-                main()
+                main()  # Call main function to restart or handle the next steps
 
             try:
-                conn.execute("INSERT INTO Rum1 VALUES(? , ? , ?)",rum1)
-                print("Data succsesfully in table Rum 1")
-                conn.commit()
+                # Inserting rum1 data into the database table Rum1
+                conn.execute("INSERT INTO Rum1 VALUES(? , ? , ?)", rum1)
+                print("Data successfully in table Rum 1")
+                conn.commit()  # Commit the transaction
             except:
+                # If there is a database error
                 print("DataError")
-                main()
-
+                main()  # Call main function to restart or handle the next steps
 
             try:
-                conn.execute("INSERT INTO Rum2 VALUES(? , ? , ?)",rum2)
-                print("Data succsesfully in table Rum 2")
-                conn.commit()
-                main()
+                # Inserting rum2 data into the database table Rum2
+                conn.execute("INSERT INTO Rum2 VALUES(? , ? , ?)", rum2)
+                print("Data successfully in table Rum 2")
+                conn.commit()  # Commit the transaction
+                main()  # Call main function to restart or handle the next steps
             except:
+                # If there is a database error
                 print("DataError.")
-                main()
+                main()  # Call main function to restart or handle the next steps
     except:
+        # If there is a connection error or other master failure
         print("Master failed or connection error")
-        main()
-
-
+        main()  # Call main function to restart or handle the next steps
 
 def main():
     time.sleep(t)
