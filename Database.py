@@ -140,6 +140,7 @@ def main():
     time.sleep(t)
     incomming = []
     data = ser.readline().decode('utf-8')
+    #data string for debugging with the setup
     #data = ['M:1;I:48:T:36.10:S:4:D:24,5,5,14,12,36;I:49:T:30.10:S:10:D:24,5,5,14,12,36;']
     #data = ['M:1;I:48:T:0.00:S:1:D:24,5,5,14,12,36;I:49:T:31.60:S:1:D:24,5,5,14,12,36;']
     #data = []
