@@ -136,6 +136,48 @@ def Readsystem(incomming):
         print("Master failed or connection error")
         main()  # Call main function to restart or handle the next steps
 
+# The main function that runs at program start
+def main():
+    time.sleep(t)  # Pause the program for 't' seconds
+    incomming = []  # Initialize an empty list for incoming data
+    data = ser.readline().decode('utf-8')  # Read a line from the serial port and decode it to a UTF-8 string
+    incomming = data  # Assign the incoming data to the variable 'incomming'
+    
+    if data:  # If data is available
+        if len(data) > 0:  # Check if the data length is greater than 0
+            print("Putting into table")  # Print a debug message
+            print(incomming)  # Print the incoming data
+            Readsystem(incomming)  # Call the function 'Readsystem' with the incoming data as an argument
+        else:
+            print("not long enough")  # Print a debug message if data is not long enough
+            print(data)  # Print the current data
+            print(incomming)  # Print the incoming data
+            main()  # Call the main function again (recursively)
+    else:
+        print("Empty waiting for data")  # Print a debug message if no data is available
+        main()  # Call the main function again (recursively)
+
+# Function to send a timestamp
+def sendtimestamp():
+    mystr = ""  # Initialize an empty string
+    mystr += hex(dt.year)  # Add the year in hexadecimal
+    mystr += hex(dt.month)  # Add the month in hexadecimal
+    mystr += hex(dt.day)  # Add the day in hexadecimal
+    mystr += hex(dt.hour)  # Add the hour in hexadecimal
+    mystr += hex(dt.minute)  # Add the minute in hexadecimal
+    mystr += hex(dt.second)  # Add the second in hexadecimal
+    mystr += hex(0x0d)  # Add a carriage return character in hexadecimal
+    print(mystr)  # Print the timestamp string
+    main()  # Call the main function again
+
+# Program entry point
+if __name__ == "__main__":
+    main()  # Call the main function
+
+
+
+##########
+# Jeg var ikke lige sikker, om der var noget af dette vi skulle beholde. DETTE SKAL MÅSKE BARE SLETTES!!!
 def main():
     time.sleep(t)
     incomming = []
@@ -205,3 +247,4 @@ def sendtimestamp():
 
 if __name__ == "__main__":
     main()
+###########
