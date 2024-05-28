@@ -141,6 +141,10 @@ def main():
     time.sleep(t)  # Pause the program for 't' seconds
     incomming = []  # Initialize an empty list for incoming data
     data = ser.readline().decode('utf-8')  # Read a line from the serial port and decode it to a UTF-8 string
+    #data string for debugging with the setup
+    #data = ['M:1;I:48:T:36.10:S:4:D:24,5,5,14,12,36;I:49:T:30.10:S:10:D:24,5,5,14,12,36;']
+    #data = ['M:1;I:48:T:0.00:S:1:D:24,5,5,14,12,36;I:49:T:31.60:S:1:D:24,5,5,14,12,36;']
+    #data = []
     incomming = data  # Assign the incoming data to the variable 'incomming'
     
     if data:  # If data is available
@@ -173,79 +177,3 @@ def sendtimestamp():
 # Program entry point
 if __name__ == "__main__":
     main()  # Call the main function
-
-
-
-##########
-# Jeg var ikke lige sikker, om der var noget af dette vi skulle beholde. DETTE SKAL MÅSKE BARE SLETTES!!!
-def main():
-    time.sleep(t)
-    incomming = []
-    data = ser.readline().decode('utf-8')
-    #data string for debugging with the setup
-    #data = ['M:1;I:48:T:36.10:S:4:D:24,5,5,14,12,36;I:49:T:30.10:S:10:D:24,5,5,14,12,36;']
-    #data = ['M:1;I:48:T:0.00:S:1:D:24,5,5,14,12,36;I:49:T:31.60:S:1:D:24,5,5,14,12,36;']
-    #data = []
-    incomming = data
-    if data:
-        if len(data) > 0:
-            print("Putting into table")
-            print(incomming)
-            Readsystem(incomming)
-        else:
-            print("not long enogh")
-            print(data)
-            print(incomming)
-            main()
-    else:
-
-        print("Empty waiting for data")
-        main()
-
-def sendtimestamp():
-    mystr = ""
-    mystr += hex(dt.year)
-    mystr += hex(dt.month)
-    mystr += hex(dt.day)
-    mystr += hex(dt.hour)
-    mystr += hex(dt.minute)
-    mystr += hex(dt.second)
-    mystr += hex(0x0d)
-    print(mystr)
-    #ser.write(mystr.encode())
-    main()
-
-    #try:
-        #while True:
-            # Get the current time in hexadecimal format
-            #time_hex = get_current_time_hex()
-            # Add carriage return (CR) character (0x0D) at the end
-            #message = time_hex + "0D"
-            # Convert the hex string to bytes
-            #message_bytes = bytes.fromhex(message)
-            # Send the message over UART
-            #ser.write(message_bytes)
-            # Print sent message for debugging
-            #print(f"Sent: {message_bytes}")
-            # Wait for a second before sending the next time
-            #time.sleep(1)
-
-    #except:
-        #print("Failed to send time")
-
-    #finally:
-        #main()
-
-
-#def get_current_time_hex():
-    # Get the current local time
-    #current_time = time.localtime()
-    # Format the time as HHMMSS
-    #time_str = time.strftime("%H%M%S", current_time)
-    # Convert the time string to its hexadecimal representation
-    #time_hex = time_str.encode('utf-8').hex()
-    #return time_hex
-
-if __name__ == "__main__":
-    main()
-###########
